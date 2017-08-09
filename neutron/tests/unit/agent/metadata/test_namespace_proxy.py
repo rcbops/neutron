@@ -259,8 +259,7 @@ class TestProxyDaemon(base.BaseTestCase):
                                           'router_id')
                 pd.run()
                 Server.assert_has_calls([
-                    mock.call('neutron-network-metadata-proxy',
-                              num_threads=None),
+                    mock.call('neutron-network-metadata-proxy'),
                     mock.call().start(mock.ANY, 9697),
                     mock.call().wait()]
                 )
@@ -275,7 +274,6 @@ class TestProxyDaemon(base.BaseTestCase):
                         cfg.CONF.metadata_port = 9697
                         cfg.CONF.pid_file = 'pidfile'
                         cfg.CONF.daemonize = True
-                        cfg.CONF.metadata_proxy_num_threads = 25
                         utils_cfg.CONF.log_opt_values.return_value = None
                         ns_proxy.main()
 
@@ -286,8 +284,7 @@ class TestProxyDaemon(base.BaseTestCase):
                                       network_id=None,
                                       user=mock.ANY,
                                       group=mock.ANY,
-                                      watch_log=mock.ANY,
-                                      proxy_threads=25),
+                                      watch_log=mock.ANY),
                             mock.call().start()]
                         )
 
@@ -301,7 +298,6 @@ class TestProxyDaemon(base.BaseTestCase):
                         cfg.CONF.metadata_port = 9697
                         cfg.CONF.pid_file = 'pidfile'
                         cfg.CONF.daemonize = False
-                        cfg.CONF.metadata_proxy_num_threads = 50
                         utils_cfg.CONF.log_opt_values.return_value = None
                         ns_proxy.main()
 
@@ -312,7 +308,6 @@ class TestProxyDaemon(base.BaseTestCase):
                                       network_id=None,
                                       user=mock.ANY,
                                       group=mock.ANY,
-                                      watch_log=mock.ANY,
-                                      proxy_threads=50),
+                                      watch_log=mock.ANY),
                             mock.call().run()]
                         )

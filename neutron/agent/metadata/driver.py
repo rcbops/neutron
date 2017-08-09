@@ -103,7 +103,8 @@ class MetadataDriver(object):
                          '--state_path=%s' % conf.state_path,
                          '--metadata_port=%s' % port,
                          '--metadata_proxy_user=%s' % user,
-                         '--metadata_proxy_group=%s' % group]
+                         '--metadata_proxy_group=%s' % group,
+                         '--config-file=/etc/neutron/neutron.conf']
             proxy_cmd.extend(config.get_log_args(
                 conf, 'neutron-ns-metadata-proxy-%s.log' % uuid,
                 metadata_proxy_watch_log=watch_log))
